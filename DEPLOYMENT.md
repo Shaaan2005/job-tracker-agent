@@ -110,45 +110,69 @@ In this mode:
 
 ---
 
-## Option C: Render Cloud Deployment (Free Tier Web Service)
+## Option C: Render Cloud Deployment (Zero-Cost Portfolio Demo)
 
 Render provides free hosting for web services with automatic HTTPS and git push-to-deploy.
 
-### Requirements & Limitations
-- **Hosting Tier**: Render Free Web Service ($0/month).
-- **Inactivity Spin-down**: Free instances sleep after 15 minutes of inactivity; the first request after spin-down takes 30–50 seconds to boot.
-- **Storage**: By default, SQLite stores data on the local container filesystem. On the free tier without a persistent disk add-on, data persists across requests but resets on manual redeployments or container restarts.
-- **LLM Mode**: On free 512 MB instances, `LLM_BACKEND` defaults to `disabled` (or points to a remote Ollama endpoint via `OLLAMA_HOST`).
+### Storage Model & Hosting Limitations
 
-### Deployment Steps
+> **IMPORTANT: Free Tier Storage is Ephemeral**
+> - **SQLite on Render Free Tier**: Render's free web services run in containers with an **ephemeral filesystem**. The local SQLite database (`job_tracker.db`) will be **reset to empty** whenever the service spins down due to inactivity (after 15 minutes of idle time), restarts, or redeploys.
+> - **Suitability for Portfolio Demos**: This ephemeral SQLite setup is ideal for portfolio showcases: it costs $0.00, requires no cloud database configuration, and uses synthetic demo data that visitors can generate and explore fresh on each visit.
+> - **Render Free PostgreSQL Limitation**: While Render offers a free managed PostgreSQL add-on, it **expires and is deleted after 30 days**, making it unsuitable for persistent long-term portfolio demos without continuous recreation.
 
-1. **Create a GitHub Repository**:
-   - Create a new public or private repository on [github.com](https://github.com).
-   - Push your local code to GitHub:
-     ```bash
-     cd job-tracker-agent
-     git remote add origin https://github.com/<your-username>/<repo-name>.git
-     git branch -M main
-     git push -u origin main
-     ```
+### Long-Term Persistent Storage Alternatives (If Required)
+If you require persistent data retention beyond ephemeral demo storage:
+1. **Free Serverless PostgreSQL (Recommended Zero-Cost Permanent Storage)**:
+   - Use a free serverless PostgreSQL provider such as **Neon** (`neon.tech`) or **Supabase** (`supabase.com`).
+   - Neon offers a generous free tier (0.5 GB storage, auto-suspend, no 30-day drop as long as active once every 90 days).
+   - Configuration: Set `DATABASE_URL=postgresql://user:password@ep-xyz.neon.tech/dbname?sslmode=require` in Render Environment Variables.
+2. **Render Paid Persistent Disk**:
+   - Requires upgrading to a Render Paid Web Service plan (Starter plan starts at **$7/month**) + Persistent Disk (**$0.25/GB/month**, minimum 1 GB).
+   - Configuration: Attach a persistent disk mounted to `/data` and set `DATABASE_URL=sqlite:////data/job_tracker.db`.
 
-2. **Deploy on Render**:
-   - Sign up or log in at [render.com](https://render.com).
-   - In the Render Dashboard, click **New +** $\rightarrow$ **Blueprint**.
-   - Select your GitHub repository.
-   - Render will automatically read [`render.yaml`](render.yaml) and configure:
-     - **Name**: `job-tracker-agent`
-     - **Environment**: `Python 3`
-     - **Build Command**: `pip install -r requirements.txt`
-     - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-   - Click **Apply**.
+### Instance & Compute Limits
+- **RAM**: 512 MB memory ceiling on free web services.
+- **Inactivity Sleep**: Free instances sleep after 15 minutes of inactivity; the initial cold-start request after sleep takes ~30–50 seconds to wake up.
+- **LLM Mode**: Set `LLM_BACKEND=disabled` by default (as configured in [`render.yaml`](render.yaml)) so the app runs smoothly in lightweight mode (~60 MB RAM) with full dashboard UI, profile creation, status transitions, application filtering, and weekly stats.
 
-3. **Verify Deployment**:
-   - Once the build succeeds, Render provides your live URL: `https://job-tracker-agent-<unique-id>.onrender.com`.
-   - Open `https://job-tracker-agent-<unique-id>.onrender.com` in your browser to verify the interactive dashboard.
-   - Verify health check:
-     ```bash
-     curl https://job-tracker-agent-<unique-id>.onrender.com/health
-     # {"status":"ok"}
-     ```
+---
+
+### Step-by-Step Instructions to Connect Repository to Render
+
+#### 1. Push Local Git Repository to GitHub
+*(Perform these commands when you are ready to publish)*
+```bash
+# From the project directory:
+cd job-tracker-agent
+
+# Set your GitHub remote repository URL:
+git remote add origin https://github.com/<your-github-username>/job-tracker-agent.git
+
+# Set main branch and push:
+git branch -M main
+git push -u origin main
+```
+
+#### 2. Connect Repository on Render
+1. Log in to [dashboard.render.com](https://dashboard.render.com).
+2. Click **New +** (top right) $\rightarrow$ **Blueprint**.
+3. Connect your GitHub account and select your `job-tracker-agent` repository.
+4. Render automatically detects [`render.yaml`](render.yaml) and displays the blueprint configuration:
+   - **Service Name**: `job-tracker-agent`
+   - **Runtime**: `Python 3`
+   - **Plan**: `Free` ($0.00/mo)
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+   - **Environment Variables**: `LLM_BACKEND=disabled`, `DATABASE_URL=sqlite:///./job_tracker.db`
+5. Click **Apply** to trigger the initial deployment.
+
+#### 3. Verify the Live Demo
+- Render assigns a public URL: `https://job-tracker-agent-<unique-id>.onrender.com`.
+- Verify the health check:
+  ```bash
+  curl https://job-tracker-agent-<unique-id>.onrender.com/health
+  # Expected: {"status":"ok"}
+  ```
+- Open the live URL in your browser: the dashboard will load with candidate profile setup, demo posting presets, application tracking, and stats.
 
