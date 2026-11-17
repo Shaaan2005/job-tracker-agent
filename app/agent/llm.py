@@ -68,11 +68,35 @@ class RemoteLLM:
             "model": self.model,
             "messages": messages,
             "temperature": 0.1,
+            "response_format": {"type": "json_object"},
         }
         resp = self._client.post(self._endpoint, headers=headers, json=payload)
-        resp.raise_for_status()
+        if resp.status_code == 400:
+            try:
+                err_data = resp.json().get("error", {})
+                if err_data.get("code") == "tool_use_failed" and "failed_generation" in err_data:
+                    raw_gen = err_data["failed_generation"]
+                    try:
+                        parsed_gen = json.loads(raw_gen)
+                        if (
+                            isinstance(parsed_gen, dict)
+                            and "arguments" in parsed_gen
+                            and isinstance(parsed_gen["arguments"], dict)
+                            and "tool" in parsed_gen["arguments"]
+                        ):
+                            return json.dumps(parsed_gen["arguments"])
+                    except Exception:
+                        pass
+                    return raw_gen
+            except Exception:
+                pass
+
+        if resp.is_error:
+            logger.error("Remote LLM error [%d]: %s", resp.status_code, resp.text)
+            resp.raise_for_status()
+
         data = resp.json()
-        content = data["choices"][0]["message"]["content"]
+        content = data["choices"][0]["message"].get("content") or ""
         logger.debug("Remote LLM response: %s", content[:200])
         return content
 
