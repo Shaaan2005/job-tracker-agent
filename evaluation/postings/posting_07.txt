@@ -1,0 +1,26 @@
+# SYNTHETIC JOB POSTING
+
+Company: CloudPulse Infrastructure
+Position: DevOps Intern
+Location: Chicago, IL (Remote)
+Duration: Summer 2025
+Application Deadline: April 25, 2025
+
+About the Role:
+CloudPulse manages multi-cloud deployments for high-volume ecommerce clients. We are seeking a DevOps Intern to help automate cloud provisioning, improve alert routing, and streamline deployment pipelines.
+
+Key Responsibilities:
+- Write and maintain Terraform configurations and container build scripts.
+- Improve observability pipelines using Prometheus and Grafana dashboards.
+- Automate cluster configuration and helm chart deployments.
+
+Required Qualifications & Skills:
+- Strong familiarity with Docker container creation and multi-stage builds.
+- Practical experience managing clusters with Kubernetes.
+- Solid understanding of Linux system administration and shell scripting.
+- Scripting ability in Python for automation tasks.
+- Familiarity with Go for writing custom Kubernetes controllers or CLI tools.
+
+Preferred Qualifications:
+- Experience with AWS or Google Cloud Platform.
+- Familiarity with GitOps workflows (ArgoCD or Flux).

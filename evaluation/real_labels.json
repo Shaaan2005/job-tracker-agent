@@ -1,0 +1,55 @@
+{
+  "real_01.txt": {
+    "required": [
+      "mern stack",
+      "node.js",
+      "mongodb",
+      "react"
+    ],
+    "preferred": [
+      "github copilot",
+      "cursor",
+      "chatgpt"
+    ]
+  },
+  "real_02.txt": {
+    "required": [
+      "whisper",
+      "wav2vec2",
+      "hubert",
+      "pytorch",
+      "tensorflow",
+      "hugging face transformers",
+      "aws",
+      "gcp",
+      "azure",
+      "docker",
+      "kubernetes"
+    ],
+    "domain_tags": [
+      "asr",
+      "speech-to-speech",
+      "speech recognition"
+    ],
+    "preferred": [
+      "open-source contributions",
+      "github projects",
+      "kaggle",
+      "multilingual speech data",
+      "low-resource speech data"
+    ]
+  },
+  "real_03.txt": {
+    "required": [
+      "python"
+    ],
+    "alternative": [
+      "typescript"
+    ],
+    "preferred": [
+      "web scraping",
+      "data processing",
+      "api integration"
+    ]
+  }
+}

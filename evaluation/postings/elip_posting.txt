@@ -1,0 +1,25 @@
+Company: Elip AI
+Position: AI Software Engineer Intern
+Location: San Francisco, CA (Remote Eligible)
+Duration: Summer 2025 / 12-16 weeks
+Application Deadline: Rolling Basis
+
+About the Role:
+Elip AI is building next-generation agentic workflows and tool-calling systems for developers and enterprise automation. We are seeking an ambitious AI Software Engineer Intern to work at the intersection of large language models, agent architectures, and backend systems.
+
+Key Responsibilities:
+- Design, implement, and benchmark tool-calling agent loops and structured extraction pipelines.
+- Build low-latency asynchronous APIs for agent orchestration and task execution.
+- Maintain persistent database schemas for agent state, conversation logs, and evaluation metrics.
+- Containerize agent services and establish robust test harnesses.
+
+Required Qualifications & Skills:
+- Proficiency in Python, including async programming (asyncio, Pydantic).
+- Hands-on experience developing REST APIs using FastAPI.
+- Familiarity with containerization and local orchestration with Docker.
+- Experience with relational databases and SQL, particularly PostgreSQL.
+- Solid version control habits using Git in team settings.
+
+Preferred Qualifications:
+- Experience building with local LLMs (Ollama, vLLM, llama.cpp).
+- Familiarity with autonomous agent architectures and tool dispatch loops.

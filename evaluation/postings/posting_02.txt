@@ -1,0 +1,25 @@
+# SYNTHETIC JOB POSTING
+
+Company: CogniText AI
+Position: Machine Learning Engineering Intern
+Location: San Francisco, CA (On-site)
+Duration: 12-16 weeks
+Application Deadline: April 30, 2025
+
+About the Role:
+CogniText AI builds conversational intelligence tools for clinical researchers. We are looking for an ML Intern to assist our research team in fine-tuning open-weights foundation models and deploying low-latency inference pipelines.
+
+Key Responsibilities:
+- Fine-tune transformer architectures for biomedical text summarization.
+- Evaluate model generations with custom validation harnesses and human-in-the-loop scoring.
+- Profile inference bottlenecks across local GPU clusters.
+
+Required Qualifications & Skills:
+- Strong programming skills in Python.
+- Proven experience with deep learning frameworks, specifically PyTorch.
+- Comfortable working in a Linux environment and command-line tooling.
+- Active proficiency with Git and pull-request workflows.
+
+Preferred Qualifications:
+- Contributions to open-source ML libraries (Hugging Face Transformers, vLLM).
+- Background in statistical NLP or computational linguistics.

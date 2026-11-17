@@ -1,0 +1,25 @@
+# SYNTHETIC JOB POSTING
+
+Company: SwiftMobile Technologies
+Position: Mobile & API Engineering Intern
+Location: San Diego, CA (Remote)
+Duration: Summer 2025
+Application Deadline: May 5, 2025
+
+About the Role:
+SwiftMobile creates health habit-tracking applications used by half a million daily subscribers. We are seeking an intern to work on both mobile client features and high-throughput sync APIs.
+
+Key Responsibilities:
+- Build cross-platform views and offline-first database synchronization.
+- Implement performant REST endpoints and documentation specs.
+- Integrate push notification hooks and event tracking analytics.
+
+Required Qualifications & Skills:
+- Proficiency with TypeScript for web and mobile components.
+- Strong practical experience building applications with React.
+- Backend programming skills in Python.
+- Hands-on experience developing asynchronous APIs with FastAPI.
+
+Preferred Qualifications:
+- Experience with React Native or Expo.
+- Familiarity with SQLite or mobile local storage.

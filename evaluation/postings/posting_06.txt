@@ -1,0 +1,25 @@
+# SYNTHETIC JOB POSTING
+
+Company: VisionCore Labs
+Position: AI Research Intern
+Location: Boston, MA (Hybrid)
+Duration: 12 weeks
+Application Deadline: May 20, 2025
+
+About the Role:
+VisionCore is developing zero-shot object detection systems for autonomous robotics. We seek an AI Research Intern to prototype novel multimodal perception architectures.
+
+Key Responsibilities:
+- Train and evaluate vision-language models on robotic navigation datasets.
+- Implement data augmentation and synthetic image generation pipelines.
+- Profile and convert neural network checkpoints for deployment on embedded edge boards.
+
+Required Qualifications & Skills:
+- Extensive programming experience in Python.
+- Hands-on experience with deep learning in TensorFlow.
+- Experience writing custom training loops in PyTorch.
+- Foundational skills in C++ for model deployment and runtime wrappers.
+
+Preferred Qualifications:
+- Publications or preprints at CVPR, ICCV, ECCV, or NeurIPS.
+- Experience with TensorRT or ONNX Runtime.

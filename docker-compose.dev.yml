@@ -1,0 +1,20 @@
+# Development override: automatically pulls the Ollama model on startup
+version: "3.9"
+
+services:
+  ollama-init:
+    image: ollama/ollama
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo "Waiting for Ollama service to start..."
+        until /bin/ollama list > /dev/null 2>&1; do
+          sleep 2
+        done
+        echo "Ollama is ready. Pulling llama3..."
+        /bin/ollama pull llama3
+        echo "Model pull complete."

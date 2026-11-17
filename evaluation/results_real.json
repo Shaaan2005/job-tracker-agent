@@ -1,0 +1,161 @@
+{
+  "model": "llama3",
+  "dataset": "real",
+  "total_postings": 3,
+  "macro_precision": 1.0,
+  "macro_recall": 1.0,
+  "avg_agent_steps": 4.0,
+  "avg_json_retries": 0.0,
+  "avg_wall_clock_seconds": 46.11,
+  "tool_sequence_distribution": {
+    "extract_posting_fields -> match_skills -> save_application -> finish": 3
+  },
+  "results": [
+    {
+      "file": "real_01.txt",
+      "status": "SUCCESS",
+      "ground_truth_required": [
+        "mern stack",
+        "node.js",
+        "mongodb",
+        "react"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [
+        "github copilot",
+        "cursor",
+        "chatgpt"
+      ],
+      "domain_tags": [],
+      "extracted_raw": [
+        "mern stack",
+        "node.js",
+        "mongodb",
+        "react"
+      ],
+      "extracted_normalized": [
+        "mern stack",
+        "mongodb",
+        "nodejs",
+        "react"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "steps_count": 4,
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
+      "json_retries": 0,
+      "wall_clock_seconds": 52.48
+    },
+    {
+      "file": "real_02.txt",
+      "status": "SUCCESS",
+      "ground_truth_required": [
+        "whisper",
+        "wav2vec2",
+        "hubert",
+        "pytorch",
+        "tensorflow",
+        "hugging face transformers",
+        "aws",
+        "gcp",
+        "azure",
+        "docker",
+        "kubernetes"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [
+        "open-source contributions",
+        "github projects",
+        "kaggle",
+        "multilingual speech data",
+        "low-resource speech data"
+      ],
+      "domain_tags": [
+        "asr",
+        "speech-to-speech",
+        "speech recognition"
+      ],
+      "extracted_raw": [
+        "PyTorch",
+        "TensorFlow",
+        "Hugging Face Transformers",
+        "Docker",
+        "Kubernetes",
+        "Whisper",
+        "wav2vec2",
+        "HuBERT",
+        "AWS",
+        "GCP",
+        "Azure"
+      ],
+      "extracted_normalized": [
+        "aws",
+        "azure",
+        "docker",
+        "gcp",
+        "hubert",
+        "hugging face transformers",
+        "kubernetes",
+        "pytorch",
+        "tensorflow",
+        "wav2vec2",
+        "whisper"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "steps_count": 4,
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
+      "json_retries": 0,
+      "wall_clock_seconds": 48.33
+    },
+    {
+      "file": "real_03.txt",
+      "status": "SUCCESS",
+      "ground_truth_required": [
+        "python"
+      ],
+      "alternative_skills": [
+        "typescript"
+      ],
+      "preferred_skills": [
+        "web scraping",
+        "data processing",
+        "api integration"
+      ],
+      "domain_tags": [],
+      "extracted_raw": [
+        "Python"
+      ],
+      "extracted_normalized": [
+        "python"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "steps_count": 4,
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
+      "json_retries": 0,
+      "wall_clock_seconds": 37.52
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+SOURCE: LinkedIn, 2026-11-17, REAL POSTING
+Company: Heads Up For Tails
+Role: Software Engineering Intern
+Note: Unpaid internship
+
+About the job
+About Heads Up For Tails
+
+Heads Up For Tails is India's most loved pet-care brand, with 100+ stores across 20 cities and a catalog of 5,000+ India-first, category-defining products, backed by an omni-channel network of manufacturing, retail, e-commerce and distribution.
+
+About The Role
+
+We are seeking an energetic, deeply curious Software Engineering Intern to join our fast-paced, high-growth engineering team. In this role, you will have the unique opportunity to gain hands-on experience building scalable applications while working alongside established industry leaders. We are looking for someone with a strong foundation in modern web development who is eager to learn, build and take ownership of real-world features.
+
+Key Responsibilities
+
+- Build & Contribute: Assist in designing and developing robust backend services and RESTful APIs using Node.js and MongoDB.
+- Full-Stack Exposure: Support the team in delivering seamless user experiences across the MERN stack, bridging the gap between frontend components and backend data.
+- Collaborate & Learn: Partner with senior engineers, product managers and designers to translate business requirements into technical solutions.
+- Write Clean Code: Participate in code reviews, write unit tests and learn best practices for maintaining a scalable, production-grade codebase.
+- Automate: Help build and maintain scripts or basic CI/CD workflows to streamline daily development and testing processes.
+
+Requirements
+
+- Eligibility: Final-year student, recent graduate, or 0–1 year of experience.
+- Core Foundation: Academic, bootcamp or project-based experience focused on the MERN stack.
+- Backend Knowledge: Solid foundational understanding of Node.js and MongoDB, including basic schema design and routing.
+- The Right Mindset: You bring high energy and relentless curiosity. You are not afraid to dive into unfamiliar code, ask hard questions and learn from mistakes.
+- Problem Solver: A strong logical thinker with a bias for action and a desire to figure out how complex systems work under the hood.
+- Bonus (Not Mandatory): Familiarity with using AI coding assistants (like GitHub Copilot, Cursor or ChatGPT) to accelerate personal development workflows, or a general interest in modern AI technologies.
+
+Why Join Us?
+
+- Work with the Best: Gain direct mentorship and exposure to industry leaders who are deeply invested in your growth and engineering excellence.
+- High-Growth Trajectory: Work on real, impactful projects that shape our product's architecture, rather than doing busywork.
+- Culture of Innovation: We provide a supportive, resource-rich environment where you have the autonomy to do your best work and learn at an exponential rate.
+
+Note: This is a unpaid internship.
+Skills: mern stack,stack,node.js,mongodb,react

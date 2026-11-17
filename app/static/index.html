@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Tracker Agent | AI Application Tracking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --accent: #8b5cf6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 1.5rem;
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; }
+    
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 2rem;
+    }
+
+    .brand { display: flex; align-items: center; gap: 0.75rem; }
+    .brand-icon {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    .brand h1 { font-size: 1.4rem; font-weight: 700; }
+    .brand p { font-size: 0.85rem; color: var(--text-muted); }
+
+    .header-badges { display: flex; align-items: center; gap: 0.75rem; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #1e293b;
+      border: 1px solid var(--card-border);
+    }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .badge-online .badge-dot { background: var(--success); box-shadow: 0 0 8px var(--success); }
+    .badge-ai .badge-dot { background: var(--accent); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-val { font-size: 1.8rem; font-weight: 700; color: #fff; }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 1.75rem;
+    }
+    @media (max-width: 1024px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--text-muted); }
+    input, textarea, select {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--primary); }
+    textarea { resize: vertical; min-height: 120px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
+    }
+    .btn:hover { background: var(--primary-hover); }
+    .btn:active { transform: scale(0.98); }
+    .btn-secondary {
+      background: #334155;
+      color: #f8fafc;
+      font-size: 0.8rem;
+      padding: 0.4rem 0.75rem;
+      width: auto;
+    }
+    .btn-secondary:hover { background: #475569; }
+
+    .preset-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .preset-btn {
+      background: #0f172a;
+      border: 1px dashed var(--card-border);
+      color: var(--text-muted);
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .preset-btn:hover {
+      border-color: var(--primary);
+      color: #fff;
+      background: #1e293b;
+    }
+
+    .tags-container { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .tag {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .tag-matched { background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399; }
+    .tag-missing { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #f87171; }
+    .tag-required { background: #334155; color: #cbd5e1; }
+
+    /* Application Card */
+    .app-card {
+      background: #1e293b;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .app-card:hover { border-color: #475569; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .app-title { font-size: 1.1rem; font-weight: 700; color: #fff; }
+    .app-meta { font-size: 0.85rem; color: var(--text-muted); }
+
+    .score-meter {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0.75rem 0;
+      background: #0f172a;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+    }
+    .score-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: #334155;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .score-bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+
+    .status-select {
+      width: auto;
+      margin-bottom: 0;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .status-saved { background: #1e293b; border-color: #64748b; color: #cbd5e1; }
+    .status-applied { background: #1e3a8a; border-color: #3b82f6; color: #bfdbfe; }
+    .status-interview { background: #78350f; border-color: #f59e0b; color: #fde68a; }
+    .status-offer { background: #064e3b; border-color: #10b981; color: #a7f3d0; }
+    .status-rejected { background: #450a0a; border-color: #ef4444; color: #fecaca; }
+
+    /* Agent Execution Log */
+    .agent-steps {
+      background: #090d16;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      max-height: 180px;
+      overflow-y: auto;
+      margin-top: 1rem;
+    }
+    .agent-step-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #1e293b;
+      color: #94a3b8;
+    }
+    .agent-step-item:last-child { border-bottom: none; }
+    .agent-step-tool { color: #38bdf8; font-weight: 600; }
+    .agent-step-success { color: #34d399; }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <div>
+        <h1>Job Tracker Agent</h1>
+        <p>Autonomous AI Agent for Job Application Tracking & Skill Matching</p>
+      </div>
+    </div>
+    <div class="header-badges">
+      <div class="badge badge-online">
+        <span class="badge-dot"></span> API Online
+      </div>
+      <div class="badge badge-ai">
+        <span class="badge-dot"></span> LLM: Llama 3
+      </div>
+    </div>
+  </header>
+
+  <!-- Summary Stats -->
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card">
+      <span class="stat-label">Total Applications</span>
+      <span class="stat-val" id="statTotal">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Interviewing</span>
+      <span class="stat-val" style="color: #f59e0b;" id="statInterviewing">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Offers</span>
+      <span class="stat-val" style="color: #10b981;" id="statOffers">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Avg Match Score</span>
+      <span class="stat-val" style="color: #38bdf8;" id="statAvgScore">0%</span>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <!-- Left Column: Profile & New Application -->
+    <div>
+      <!-- Profile Card -->
+      <div class="card">
+        <div class="card-title">
+          <span>Candidate Profile</span>
+          <button class="btn btn-secondary" onclick="openProfileModal()">Edit Profile</button>
+        </div>
+        <div id="profileDetails">
+          <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;" id="profileName">Loading candidate...</p>
+          <div class="tags-container" id="profileSkills"></div>
+        </div>
+      </div>
+
+      <!-- Add Job Application -->
+      <div class="card">
+        <div class="card-title">Analyze New Job Posting</div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          Load a synthetic posting or paste text. The agent will autonomously extract requirements and match skills.
+        </p>
+
+        <label>Synthetic Demo Presets:</label>
+        <div class="preset-pills">
+          <button type="button" class="preset-btn" onclick="loadPreset('backend')">⚡ Python Backend</button>
+          <button type="button" class="preset-btn" onclick="loadPreset('fullstack')">⚡ MERN Full-Stack</button>
+          <button type="button" class="preset-btn" onclick="loadPreset('ml')">⚡ ML / Speech Intern</button>
+        </div>
+
+        <label for="postingText">Job Posting Text:</label>
+        <textarea id="postingText" placeholder="Paste full job description or select a preset above..."></textarea>
+
+        <label for="postingUrl">Or Job Posting URL (Optional):</label>
+        <input type="text" id="postingUrl" placeholder="https://example.com/jobs/123">
+
+        <button class="btn" id="analyzeBtn" onclick="submitApplication()">
+          <span id="btnText">Run AI Agent & Track</span>
+        </button>
+
+        <div id="agentStatusBlock" style="display: none; margin-top: 1rem;">
+          <div style="font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; color: #38bdf8;">
+            <span class="spinner"></span> Agent is processing job posting...
+          </div>
+          <div class="agent-steps" id="liveSteps"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Applications List -->
+    <div>
+      <div class="card">
+        <div class="card-title">
+          <span>Tracked Applications</span>
+          <div style="display: flex; gap: 0.5rem;">
+            <select id="filterStatus" class="status-select" onchange="renderApplications()" style="background:#0f172a; color:#fff;">
+              <option value="ALL">All Statuses</option>
+              <option value="saved">Saved</option>
+              <option value="applied">Applied</option>
+              <option value="interview">Interviewing</option>
+              <option value="offer">Offer</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="applicationsContainer">
+          <div class="empty-state">Loading tracked applications...</div>
+        </div>
+      </div>
+
+      <!-- Agent Execution Audit Log -->
+      <div class="card">
+        <div class="card-title">
+          <span>Autonomous Agent Audit Log</span>
+          <button class="btn btn-secondary" onclick="loadAgentRuns()">Refresh Runs</button>
+        </div>
+        <div class="agent-steps" style="max-height: 220px;" id="agentRunsLog">
+          <div style="color: var(--text-muted); font-size: 0.8rem;">Loading recent agent executions...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentProfile = null;
+  let applicationsList = [];
+
+  const DEMO_PRESETS = {
+    backend: `Company: Apex Cloud Systems
+Role: Python Backend Developer Intern
+Location: Remote (US / EMEA)
+
+About the Job:
+We are seeking an enthusiastic Backend Developer Intern to work on high-throughput microservices.
+
+Requirements:
+- Strong proficiency in Python and FastAPI or Flask.
+- Experience with PostgreSQL and relational schema design.
+- Hands-on knowledge of Docker and containerization.
+- Familiarity with Git version control and Linux environments.`,
+
+    fullstack: `Company: Heads Up For Tails
+Role: Software Engineering Intern
+Location: Gurugram, India
+
+About the Role:
+Looking for an energetic full-stack engineer to build scalable web applications.
+
+Key Responsibilities & Skills:
+- Assist in developing backend REST APIs with Node.js and MongoDB.
+- Build interactive frontend components with React.
+- Experience with MERN stack web development.
+- Knowledge of automated testing and CI/CD pipelines.
+Skills: mern stack,node.js,mongodb,react`,
+
+    ml: `Company: VoiceArena Labs
+Role: AI-ML Engineer Intern
+Location: Gurugram, India
+
+What You'll Work On:
+Fine-tuning state-of-the-art speech and multimodal models.
+
+Required Qualifications:
+- Hands-on experience with PyTorch or TensorFlow.
+- Familiarity with Hugging Face Transformers and Whisper models.
+- Experience with Docker containers and Kubernetes.
+- Cloud platforms: AWS or GCP.`
+  };
+
+  async function init() {
+    await loadProfile();
+    await loadApplications();
+    await loadAgentRuns();
+  }
+
+  async function loadProfile() {
+    try {
+      const res = await fetch('/profile');
+      if (res.status === 404) {
+        // Automatically setup demo profile
+        await setupDefaultProfile();
+        return;
+      }
+      currentProfile = await res.json();
+      renderProfile();
+    } catch (err) {
+      console.error("Profile load failed", err);
+    }
+  }
+
+  async function setupDefaultProfile() {
+    const demoProfile = {
+      name: "Alex Rivera (Demo Candidate)",
+      skills: ["python", "fastapi", "docker", "react", "postgresql", "git", "linux"]
+    };
+    try {
+      const res = await fetch('/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(demoProfile)
+      });
+      currentProfile = await res.json();
+      renderProfile();
+    } catch (err) {
+      console.error("Default profile setup failed", err);
+    }
+  }
+
+  function renderProfile() {
+    if (!currentProfile) return;
+    document.getElementById('profileName').textContent = currentProfile.name;
+    const container = document.getElementById('profileSkills');
+    container.innerHTML = currentProfile.skills.map(s => 
+      `<span class="tag"><span style="color:var(--primary);">●</span> ${s}</span>`
+    ).join('');
+  }
+
+  async function openProfileModal() {
+    const newSkills = prompt(
+      "Update profile skills (comma-separated):",
+      currentProfile ? currentProfile.skills.join(', ') : "python, react, docker, fastapi"
+    );
+    if (newSkills !== null) {
+      const skillsArray = newSkills.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+      const res = await fetch('/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: currentProfile ? currentProfile.name : "Demo Candidate",
+          skills: skillsArray
+        })
+      });
+      currentProfile = await res.json();
+      renderProfile();
+      await loadApplications();
+    }
+  }
+
+  function loadPreset(key) {
+    document.getElementById('postingText').value = DEMO_PRESETS[key] || '';
+  }
+
+  async function submitApplication() {
+    const text = document.getElementById('postingText').value.trim();
+    const url = document.getElementById('postingUrl').value.trim();
+
+    if (!text && !url) {
+      alert("Please paste job posting text or provide a URL.");
+      return;
+    }
+
+    const btn = document.getElementById('analyzeBtn');
+    const statusBlock = document.getElementById('agentStatusBlock');
+    const liveSteps = document.getElementById('liveSteps');
+
+    btn.disabled = true;
+    statusBlock.style.display = 'block';
+    liveSteps.innerHTML = '<div class="agent-step-item">Agent dispatched: initializing autonomous workflow...</div>';
+
+    const payload = {};
+    if (text) payload.posting_text = text;
+    if (url) payload.posting_url = url;
+
+    try {
+      // Simulate live progress hints while agent runs
+      setTimeout(() => {
+        liveSteps.innerHTML += '<div class="agent-step-item"><span class="agent-step-tool">Step 1: extract_posting_fields</span> (parsing requirements via Llama 3)...</div>';
+      }, 1500);
+      setTimeout(() => {
+        liveSteps.innerHTML += '<div class="agent-step-item"><span class="agent-step-tool">Step 2: match_skills</span> (evaluating profile intersection)...</div>';
+      }, 4000);
+      setTimeout(() => {
+        liveSteps.innerHTML += '<div class="agent-step-item"><span class="agent-step-tool">Step 3: save_application</span> (persisting application record)...</div>';
+      }, 7000);
+
+      const res = await fetch('/applications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.detail || "Agent execution failed");
+      }
+
+      const savedApp = await res.json();
+      liveSteps.innerHTML += `<div class="agent-step-item agent-step-success">✓ Completed! Saved application ID #${savedApp.id} for ${savedApp.company}.</div>`;
+
+      // Clear form
+      document.getElementById('postingText').value = '';
+      document.getElementById('postingUrl').value = '';
+
+      await loadApplications();
+      await loadAgentRuns();
+    } catch (err) {
+      liveSteps.innerHTML += `<div class="agent-step-item" style="color:var(--danger)">Error: ${err.message}</div>`;
+      alert("Error: " + err.message);
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function loadApplications() {
+    try {
+      const res = await fetch('/applications');
+      applicationsList = await res.json();
+
+      // If empty on first load, seed synthetic demo applications so the UI is immediately demonstrative
+      if (applicationsList.length === 0) {
+        await seedDemoApplications();
+        const refetch = await fetch('/applications');
+        applicationsList = await refetch.json();
+      }
+
+      renderApplications();
+      updateStats();
+    } catch (err) {
+      console.error("Failed to load applications", err);
+    }
+  }
+
+  async function seedDemoApplications() {
+    // Quick demo presets processed via direct creation if empty
+    const demoPayloads = [
+      { text: DEMO_PRESETS.backend },
+      { text: DEMO_PRESETS.fullstack }
+    ];
+    for (const p of demoPayloads) {
+      try {
+        await fetch('/applications', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ posting_text: p.text })
+        });
+      } catch(e) {}
+    }
+  }
+
+  function renderApplications() {
+    const container = document.getElementById('applicationsContainer');
+    const filter = document.getElementById('filterStatus').value;
+
+    const filtered = filter === 'ALL' 
+      ? applicationsList 
+      : applicationsList.filter(a => a.status === filter);
+
+    if (filtered.length === 0) {
+      container.innerHTML = '<div class="empty-state">No applications match the current filter.</div>';
+      return;
+    }
+
+    container.innerHTML = filtered.map(app => {
+      const scorePct = Math.round((app.match_score || 0) * 100);
+      const scoreColor = scorePct >= 70 ? 'var(--success)' : (scorePct >= 40 ? 'var(--warning)' : 'var(--text-muted)');
+
+      return `
+        <div class="app-card">
+          <div class="app-header">
+            <div>
+              <div class="app-title">${escapeHtml(app.role_title)}</div>
+              <div class="app-meta"><strong>${escapeHtml(app.company)}</strong> • ${escapeHtml(app.location || 'Remote')} • ID #${app.id}</div>
+            </div>
+            <select class="status-select status-${app.status}" onchange="updateStatus(${app.id}, this.value)">
+              <option value="saved" ${app.status === 'saved' ? 'selected' : ''}>Saved</option>
+              <option value="applied" ${app.status === 'applied' ? 'selected' : ''}>Applied</option>
+              <option value="interview" ${app.status === 'interview' ? 'selected' : ''}>Interviewing</option>
+              <option value="offer" ${app.status === 'offer' ? 'selected' : ''}>Offer</option>
+              <option value="rejected" ${app.status === 'rejected' ? 'selected' : ''}>Rejected</option>
+            </select>
+          </div>
+
+          <div class="score-meter">
+            <span style="font-size:0.85rem; font-weight:700; color:${scoreColor}; min-width:40px;">${scorePct}%</span>
+            <div class="score-bar-bg">
+              <div class="score-bar-fill" style="width: ${scorePct}%; background: ${scoreColor};"></div>
+            </div>
+            <span style="font-size:0.75rem; color:var(--text-muted);">Match Score</span>
+          </div>
+
+          <div style="margin-top: 0.6rem;">
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem;">Matched Skills:</div>
+            <div class="tags-container">
+              ${(app.matched_skills || []).length > 0 
+                ? app.matched_skills.map(s => `<span class="tag tag-matched">✓ ${escapeHtml(s)}</span>`).join('') 
+                : '<span style="font-size:0.75rem; color:var(--text-muted);">None</span>'}
+            </div>
+          </div>
+
+          <div style="margin-top: 0.4rem;">
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem;">Missing Skills:</div>
+            <div class="tags-container">
+              ${(app.missing_skills || []).length > 0 
+                ? app.missing_skills.map(s => `<span class="tag tag-missing">✕ ${escapeHtml(s)}</span>`).join('') 
+                : '<span style="font-size:0.75rem; color:var(--success);">All skills matched!</span>'}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  async function updateStatus(appId, newStatus) {
+    try {
+      const res = await fetch(`/applications/${appId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (!res.ok) throw new Error("Status update failed");
+      const updated = await res.json();
+      
+      // Update local memory
+      const idx = applicationsList.findIndex(a => a.id === appId);
+      if (idx !== -1) applicationsList[idx] = updated;
+      
+      renderApplications();
+      updateStats();
+    } catch (err) {
+      alert("Failed to update application status: " + err.message);
+    }
+  }
+
+  function updateStats() {
+    document.getElementById('statTotal').textContent = applicationsList.length;
+    document.getElementById('statInterviewing').textContent = applicationsList.filter(a => a.status === 'interview').length;
+    document.getElementById('statOffers').textContent = applicationsList.filter(a => a.status === 'offer').length;
+
+    if (applicationsList.length > 0) {
+      const avg = applicationsList.reduce((acc, a) => acc + (a.match_score || 0), 0) / applicationsList.length;
+      document.getElementById('statAvgScore').textContent = Math.round(avg * 100) + '%';
+    } else {
+      document.getElementById('statAvgScore').textContent = '0%';
+    }
+  }
+
+  async function loadAgentRuns() {
+    try {
+      const res = await fetch('/agent-runs?limit=10');
+      if (!res.ok) return;
+      const runs = await res.json();
+      const container = document.getElementById('agentRunsLog');
+
+      if (runs.length === 0) {
+        container.innerHTML = '<div style="color:var(--text-muted); font-size:0.8rem;">No agent runs recorded yet.</div>';
+        return;
+      }
+
+      container.innerHTML = runs.map(r => {
+        const stepTools = (r.steps || []).map(s => s.tool).join(' → ');
+        const dateStr = new Date(r.created_at).toLocaleTimeString();
+        return `
+          <div class="agent-step-item">
+            <span style="color:#f8fafc; font-weight:600;">[Run #${r.id}]</span>
+            <span style="color:${r.status === 'success' ? 'var(--success)' : 'var(--danger)'};">[${r.status.toUpperCase()}]</span>
+            <span class="agent-step-tool">${escapeHtml(stepTools || 'No steps')}</span>
+            <span style="color:var(--text-muted); margin-left:auto;">${dateStr} (retries: ${r.json_retries})</span>
+          </div>
+        `;
+      }).join('');
+    } catch (err) {
+      console.error("Agent runs fetch error", err);
+    }
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>"']/g, function(m) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m];
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>

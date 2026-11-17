@@ -1,0 +1,84 @@
+{
+  "elip_posting.txt": [
+    "python",
+    "fastapi",
+    "docker",
+    "postgresql",
+    "git"
+  ],
+  "posting_01.txt": [
+    "python",
+    "docker",
+    "postgresql",
+    "kubernetes",
+    "git"
+  ],
+  "posting_02.txt": [
+    "python",
+    "pytorch",
+    "linux",
+    "git"
+  ],
+  "posting_03.txt": [
+    "javascript",
+    "react",
+    "typescript",
+    "git"
+  ],
+  "posting_04.txt": [
+    "typescript",
+    "nodejs",
+    "react",
+    "postgresql",
+    "docker"
+  ],
+  "posting_05.txt": [
+    "cpp",
+    "go",
+    "linux",
+    "git"
+  ],
+  "posting_06.txt": [
+    "python",
+    "tensorflow",
+    "pytorch",
+    "cpp"
+  ],
+  "posting_07.txt": [
+    "docker",
+    "kubernetes",
+    "linux",
+    "python",
+    "go"
+  ],
+  "posting_08.txt": [
+    "python",
+    "sql",
+    "postgresql",
+    "docker"
+  ],
+  "posting_09.txt": [
+    "vue",
+    "nodejs",
+    "javascript",
+    "redis"
+  ],
+  "posting_10.txt": [
+    "go",
+    "docker",
+    "kubernetes",
+    "aws"
+  ],
+  "posting_11.txt": [
+    "typescript",
+    "react",
+    "python",
+    "fastapi"
+  ],
+  "posting_12.txt": [
+    "csharp",
+    "dotnet",
+    "sql",
+    "docker"
+  ]
+}

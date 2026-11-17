@@ -1,0 +1,25 @@
+# SYNTHETIC JOB POSTING
+
+Company: DataFlow Insights
+Position: Data Engineering Intern
+Location: Atlanta, GA (Hybrid)
+Duration: Summer 2025
+Application Deadline: May 10, 2025
+
+About the Role:
+DataFlow Insights builds modern analytics pipelines for healthcare organizations. We are searching for a Data Engineering Intern to design batch ETL workflows and maintain our lakehouse schemas.
+
+Key Responsibilities:
+- Construct reliable data ingestion pipelines from external APIs and flat files.
+- Author robust database migrations and data quality test suites.
+- Optimize complex analytical queries and table partitioning.
+
+Required Qualifications & Skills:
+- Excellent programming abilities in Python.
+- In-depth mastery of SQL querying, indexing, and aggregation.
+- Practical experience with PostgreSQL databases.
+- Familiarity with Docker for running local data pipeline instances.
+
+Preferred Qualifications:
+- Exposure to Apache Spark, DuckDB, or dbt.
+- Experience with Apache Airflow or Dagster orchestration.

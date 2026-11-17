@@ -1,0 +1,26 @@
+# SYNTHETIC JOB POSTING
+
+Company: OmniPay Systems
+Position: Full Stack Engineering Intern
+Location: New York, NY (Hybrid)
+Duration: Summer 2025
+Application Deadline: April 15, 2025
+
+About the Role:
+OmniPay provides global remittance workflows. We are seeking a Full Stack Engineering Intern to help build merchant management consoles and reporting interfaces.
+
+Key Responsibilities:
+- Implement end-to-end features spanning server-side services and client portals.
+- Write unit and integration tests across both frontend and backend modules.
+- Participate in agile sprint planning, code reviews, and architectural discussions.
+
+Required Qualifications & Skills:
+- Fluency in TypeScript across the whole stack.
+- Solid server-side development experience using Node.js.
+- Strong client-side development experience with React.
+- Working knowledge of relational database design and PostgreSQL.
+- Experience containerizing local environments with Docker.
+
+Preferred Qualifications:
+- Familiarity with Redis caching patterns.
+- Prior exposure to financial or payments APIs.

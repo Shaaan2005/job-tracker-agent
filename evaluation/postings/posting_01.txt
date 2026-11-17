@@ -1,0 +1,26 @@
+# SYNTHETIC JOB POSTING
+
+Company: Apex Cloud Labs
+Position: Backend Engineering Intern
+Location: Seattle, WA (Hybrid)
+Duration: Summer 2025 (12 weeks)
+Application Deadline: May 15, 2025
+
+About the Role:
+Apex Cloud Labs is seeking a talented Backend Engineering Intern to join our distributed systems team. In this role, you will build microservices that process telemetry data from thousands of enterprise edge servers.
+
+Key Responsibilities:
+- Design and implement scalable REST and gRPC endpoints.
+- Optimize database schemas and write efficient queries for high-throughput transactional storage.
+- Package services into containerized deployments and write Kubernetes manifests.
+
+Required Qualifications & Skills:
+- Demonstrated experience writing clean code in Python.
+- Hands-on familiarity with Docker for containerization.
+- Solid experience working with relational databases, specifically PostgreSQL.
+- Understanding of cluster orchestration using Kubernetes.
+- Proficiency with Git for version control and collaborative development.
+
+Preferred Qualifications:
+- Experience with FastAPI or Celery.
+- Familiarity with CI/CD pipelines (GitHub Actions).

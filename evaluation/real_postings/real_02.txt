@@ -1,0 +1,63 @@
+SOURCE: LinkedIn, copied 2026-11-17, REAL POSTING
+Company: Voice Arena
+LinkedIn listing title: AI-ML Intern
+Job description title: AI-ML Engineer Intern
+Location: Gurugram
+Type: Full-time internship, paid, 6–12 months
+
+JOB DESCRIPTION
+
+AI-ML Engineer Intern
+
+Location: Gurgaon
+
+Type: Full-time Internship (6–12 Months) | Paid
+
+About
+
+At VoiceArena, we believe voice will become the primary interface between humans and machines. We build benchmarks, datasets, and AI systems that power some of the world's most widely used speech models.
+
+Our mission:
+
+• Enable machines to communicate as naturally as humans
+• Build benchmarks and datasets that form the backbone of global speech AI progress
+• Drive improvements through high-quality, diverse, real-world data — not just compute
+
+What You'll Work On
+
+This is not a conventional internship. You will directly contribute to work that influences the global speech AI ecosystem.
+
+Data Preparation
+
+• Design and manage end-to-end data delivery workflows from raw ingestion to structured output
+• Ensure reliable, versioned, and reproducible data handoffs to ML training infrastructure
+• Monitor pipeline health, resolve bottlenecks, and optimize throughput for large-scale data movement
+
+Benchmarking & Evaluation
+
+• Design and run evaluations for ASR and speech-to-speech systems
+• Benchmark leading speech models to identify real-world strengths, weaknesses, and failure modes
+• Build evaluation frameworks that guide top AI labs on model performance and improvement areas
+
+Modeling & Fine-Tuning
+
+• Fine-tune speech recognition models (e.g., Whisper, wav2vec2) targeting Word Error Rates of ~5%
+• Experiment with multilingual, code-switched, accented, and noisy speech data
+• Work with large-scale, production-grade speech datasets across 20+ Indian languages
+
+Who We're Looking For
+
+Required Qualifications
+
+• Students in B.Tech/B.E. graduating in 2027 (CSE, EE, AI/ML, or related fields)
+• Strong interest in speech, audio, NLP, or multimodal AI
+• Hands-on experience in one or more of the following:
+  ◦ Fine-tuning speech or language models (Whisper, wav2vec2, HuBERT, etc.)
+  ◦ Building speech-driven pipelines, classifiers, or assistants
+  ◦ Working with PyTorch, TensorFlow, or Hugging Face Transformers
+  ◦ Cloud platforms (AWS, GCP, Azure) and container tools (Docker, Kubernetes)
+
+Preferred Qualifications
+
+• Open-source contributions, GitHub projects, or Kaggle experience
+• Experience with multilingual or low-resource speech data

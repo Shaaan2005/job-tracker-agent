@@ -1,0 +1,25 @@
+# SYNTHETIC JOB POSTING
+
+Company: BrightWave Media
+Position: Web Application Intern
+Location: Los Angeles, CA (Hybrid)
+Duration: Summer 2025
+Application Deadline: May 30, 2025
+
+About the Role:
+BrightWave Media is creating interactive streaming companion applications. We are seeking an enthusiastic Web Application Intern to join our digital experiences squad.
+
+Key Responsibilities:
+- Develop interactive web components for live polling and audience reactions.
+- Build server-side WebSocket event dispatchers and cache synchronization jobs.
+- Write end-to-end browser automation tests.
+
+Required Qualifications & Skills:
+- Experience building frontend single-page applications using Vue.
+- Server-side runtime proficiency in Node.js.
+- Strong foundational grasp of JavaScript syntax and async patterns.
+- Experience with key-value data structures and caching in Redis.
+
+Preferred Qualifications:
+- Experience with Pinia or Vuex state management.
+- Exposure to WebRTC or real-time media streaming protocols.

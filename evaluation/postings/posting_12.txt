@@ -1,0 +1,25 @@
+# SYNTHETIC JOB POSTING
+
+Company: Centricity Financial
+Position: Enterprise Software Intern
+Location: Charlotte, NC (On-site)
+Duration: 10-12 weeks
+Application Deadline: April 20, 2025
+
+About the Role:
+Centricity Financial operates enterprise core banking platforms and compliance calculation engines. We are hiring an Enterprise Software Intern to assist our commercial lending engineering team.
+
+Key Responsibilities:
+- Develop and optimize microservices handling complex financial calculations.
+- Write comprehensive unit tests and automated integration tests.
+- Integrate message queues and audit log databases.
+
+Required Qualifications & Skills:
+- Strong core programming skills in C#.
+- Experience developing applications with the .NET platform.
+- Solid experience writing complex queries and stored procedures in SQL.
+- Familiarity with Docker for running service containers locally.
+
+Preferred Qualifications:
+- Familiarity with Azure cloud services (App Services, Azure SQL).
+- Exposure to Kafka or RabbitMQ event messaging.

@@ -1,0 +1,25 @@
+# SYNTHETIC JOB POSTING
+
+Company: NovaScale Networks
+Position: Systems Software Intern
+Location: Boulder, CO (On-site)
+Duration: Summer 2025
+Application Deadline: May 1, 2025
+
+About the Role:
+NovaScale is building high-speed network switches and programmable telemetry software. We are looking for an engineering student with a strong systems background to build network daemons and packet inspection drivers.
+
+Key Responsibilities:
+- Implement multi-threaded network protocol handlers and packet buffers.
+- Benchmark system throughput, memory usage, and kernel-user space boundary transitions.
+- Collaborate with hardware engineers to write device telemetry collectors.
+
+Required Qualifications & Skills:
+- Proficiency in systems programming with C++.
+- Strong working knowledge of Go for concurrent microservices.
+- Deep comfort operating within Linux system environments (bash, gdb, perf).
+- Experience with Git version control.
+
+Preferred Qualifications:
+- Familiarity with eBPF or DPDK.
+- Understanding of TCP/IP, BGP, or QUIC protocols.

@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - OLLAMA_MODEL=llama3
+      - DATABASE_URL=sqlite:////data/job_tracker.db
+      - MAX_AGENT_STEPS=6
+    volumes:
+      - app_data:/data
+    depends_on:
+      - ollama
+
+volumes:
+  ollama_data:
+  app_data:

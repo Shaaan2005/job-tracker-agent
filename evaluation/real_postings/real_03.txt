@@ -1,0 +1,41 @@
+SOURCE: LinkedIn, copied 2026-11-17, REAL POSTING
+Company: Not provided
+Role: Software Engineer Intern
+
+JOB DESCRIPTION
+
+About the Job
+
+Position Overview
+
+We are a seed-funded startup focused on using state-of-the-art AI technologies to revolutionize the credit industry. Our team consists of experts in machine learning and software engineers who have worked at top-tier US tech companies like Apple, Amazon, etc., and we are passionate about using AI to improve access to credit information for businesses. We have the product on the market, the first clients, and sufficient runway. We are seeking an enthusiastic Software Engineer Intern. This internship is ideal for final-year or graduate students (freshers may apply too) who are passionate about software development and are looking to gain real-world experience in a fast-paced startup environment. You'll work closely with our engineering team to develop and optimize our data processing tools, web scraping scripts, and contribute to various projects utilizing Python.
+
+Key Responsibilities
+
+• Python Development: Assist in the development and maintenance of Python applications, focusing on data processing, web scraping, and API integrations.
+• Code Optimization: Help optimize existing Python code for performance and scalability.
+• Collaborative Project Work: Work alongside experienced developers on significant projects, contributing to the team's goals and learning best practices.
+• Testing and Debugging: Participate in testing processes to identify bugs and issues within applications, contributing to the overall quality of the software.
+• Learning and Growth: Engage in learning opportunities to advance your Python programming skills and understanding of software development in a commercial setting.
+
+Qualifications
+
+• Currently enrolled in the final year of an undergraduate program or a graduate program in Computer Science, Engineering, or a related field, with a strong academic record. Freshers can apply as well.
+• Proficiency in Python or TypeScript, with coursework or project experience that demonstrates strong programming skills.
+• Familiarity with web scraping, data processing, and API integration is a plus.
+• Eagerness to learn new technologies and frameworks and a genuine interest in software development.
+• Strong problem-solving skills and attention to detail.
+• Ability to work both independently and as part of a team.
+
+What We Offer
+
+• Hands-on experience in a fast-paced tech startup environment.
+• Mentorship from experienced software developers and exposure to real-world projects.
+• A supportive and collaborative work culture focused on learning and professional growth.
+• A competitive internship stipend.
+
+The internship is expected to last 3–6 months, with the possibility of extension or transition to a full-time role based on performance and business needs.
+
+Requirements Added by the Job Poster
+
+• 1+ years of work experience with Python (Programming Language)

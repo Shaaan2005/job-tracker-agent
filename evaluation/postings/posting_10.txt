@@ -1,0 +1,25 @@
+# SYNTHETIC JOB POSTING
+
+Company: Stratos Cloud
+Position: Cloud Platform Intern
+Location: Denver, CO (Hybrid)
+Duration: 12 weeks
+Application Deadline: June 15, 2025
+
+About the Role:
+Stratos Cloud delivers enterprise multi-tenant database as a service. We are hiring a Cloud Platform Intern to contribute to our cluster control plane and backup management operators.
+
+Key Responsibilities:
+- Build reliable reconcile loops and custom resource controllers.
+- Test disaster recovery workflows and automated node failovers.
+- Profile storage throughput across multiple cloud providers.
+
+Required Qualifications & Skills:
+- Proficiency in Go for backend systems and CLI development.
+- Deep familiarity with container images and Docker.
+- Hands-on experience deploying and operating workloads on Kubernetes.
+- Practical experience with cloud architecture on AWS (EC2, S3, IAM).
+
+Preferred Qualifications:
+- Familiarity with Terraform or Pulumi infrastructure-as-code.
+- Understanding of distributed consensus algorithms (Raft, Paxos).

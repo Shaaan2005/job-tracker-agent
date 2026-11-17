@@ -1,0 +1,25 @@
+# SYNTHETIC JOB POSTING
+
+Company: PixelForge Interactive
+Position: Frontend Developer Intern
+Location: Austin, TX (Remote Eligible)
+Duration: Summer 2025
+Application Deadline: June 1, 2025
+
+About the Role:
+PixelForge is looking for an enthusiastic Frontend Developer Intern to contribute to our collaborative dashboard application. You will work closely with product designers to create responsive, accessible user interfaces.
+
+Key Responsibilities:
+- Build reusable UI components from Figma design specifications.
+- Integrate frontend client state with REST and WebSocket backends.
+- Ensure cross-browser responsiveness and accessibility standards (WCAG).
+
+Required Qualifications & Skills:
+- Core understanding of modern JavaScript (ES6+).
+- Practical experience building component-driven interfaces in React.
+- Strong knowledge of TypeScript for static typing and maintainable code.
+- Familiarity with version control using Git.
+
+Preferred Qualifications:
+- Experience with Tailwind CSS or CSS Modules.
+- Familiarity with Vitest or Jest unit testing.
