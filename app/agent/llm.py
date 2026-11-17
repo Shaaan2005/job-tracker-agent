@@ -68,8 +68,14 @@ class RemoteLLM:
             "model": self.model,
             "messages": messages,
             "temperature": 0.1,
-            "response_format": {"type": "json_object"},
         }
+        # OpenAI/Groq requires the word 'json' in messages to enable response_format: json_object
+        has_json_word = any(
+            "json" in str(m.get("content", "")).lower() for m in messages
+        )
+        if has_json_word:
+            payload["response_format"] = {"type": "json_object"}
+
         resp = self._client.post(self._endpoint, headers=headers, json=payload)
         if resp.status_code == 400:
             try:

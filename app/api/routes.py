@@ -141,7 +141,13 @@ async def create_application(body: ApplicationCreate, db: Session = Depends(get_
         )
     except AgentError as exc:
         logger.error("Agent failed: %s", exc)
-        raise HTTPException(status_code=500, detail=str(exc))
+        err_msg = str(exc)
+        if "429" in err_msg or "Too Many Requests" in err_msg:
+            raise HTTPException(
+                status_code=429,
+                detail="Groq API rate limit reached (30 RPM / 8,000 TPM on Free plan). Please wait 30-60 seconds before submitting another posting.",
+            )
+        raise HTTPException(status_code=500, detail=err_msg)
 
     app = queries.get_application(db, app_id)
     if app is None:
