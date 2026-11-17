@@ -134,7 +134,22 @@ If you require persistent data retention beyond ephemeral demo storage:
 ### Instance & Compute Limits
 - **RAM**: 512 MB memory ceiling on free web services.
 - **Inactivity Sleep**: Free instances sleep after 15 minutes of inactivity; the initial cold-start request after sleep takes ~30–50 seconds to wake up.
-- **LLM Mode**: Set `LLM_BACKEND=disabled` by default (as configured in [`render.yaml`](render.yaml)) so the app runs smoothly in lightweight mode (~60 MB RAM) with full dashboard UI, profile creation, status transitions, application filtering, and weekly stats.
+- **LLM Mode**: By default, `LLM_BACKEND=disabled` in [`render.yaml`](render.yaml) so the app runs cleanly without an external API key.
+
+### Enabling Zero-Cost Remote LLM Inference in the Cloud
+To enable live AI skill extraction on the deployed Render site without crashing the 512 MB RAM limit:
+1. **Get a Free API Key**:
+   - Recommended provider: **Groq** ([console.groq.com](https://console.groq.com)).
+   - **Cost**: $0.00 (Free tier with generous rate limits, no credit card required).
+   - Generates an API key (e.g. `gsk_...`) supporting OpenAI-compatible chat completions with `llama-3.1-8b-instant`.
+2. **Add Environment Variables in Render**:
+   - In Render Dashboard $\rightarrow$ select `job-tracker-agent` $\rightarrow$ **Environment**.
+   - Set:
+     - `LLM_BACKEND`: `remote`
+     - `REMOTE_LLM_URL`: `https://api.groq.com/openai/v1`
+     - `REMOTE_LLM_MODEL`: `llama-3.1-8b-instant`
+     - `REMOTE_LLM_API_KEY`: `<your-groq-api-key>`
+   - Click **Save Changes**. Render will automatically redeploy and live AI extraction will be active!
 
 ---
 

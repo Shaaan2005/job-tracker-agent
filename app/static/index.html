@@ -311,8 +311,8 @@
       <div class="badge badge-online">
         <span class="badge-dot"></span> API Online
       </div>
-      <div class="badge badge-ai">
-        <span class="badge-dot"></span> LLM: Llama 3
+      <div class="badge badge-ai" id="llmBadge">
+        <span class="badge-dot" id="llmDot"></span> <span id="llmText">Checking AI...</span>
       </div>
     </div>
   </header>
@@ -424,6 +424,29 @@
 <script>
   let currentProfile = null;
   let applicationsList = [];
+  let llmConfig = null;
+
+  async function checkLlmStatus() {
+    try {
+      const res = await fetch('/llm/status');
+      if (res.ok) {
+        llmConfig = await res.json();
+        const dot = document.getElementById('llmDot');
+        const text = document.getElementById('llmText');
+        if (llmConfig.is_ready) {
+          dot.style.background = 'var(--success)';
+          dot.style.boxShadow = '0 0 8px var(--success)';
+          text.textContent = `AI: ${llmConfig.model} (${llmConfig.backend})`;
+        } else {
+          dot.style.background = 'var(--warning)';
+          dot.style.boxShadow = 'none';
+          text.textContent = 'AI: Disabled (Demo Tracker Mode)';
+        }
+      }
+    } catch (e) {
+      console.error("LLM status check failed", e);
+    }
+  }
 
   const DEMO_PRESETS = {
     backend: `Company: Apex Cloud Systems
@@ -468,6 +491,7 @@ Required Qualifications:
   };
 
   async function init() {
+    await checkLlmStatus();
     await loadProfile();
     await loadApplications();
     await loadAgentRuns();
@@ -581,6 +605,16 @@ Required Qualifications:
 
       if (!res.ok) {
         const err = await res.json();
+        if (res.status === 503) {
+          liveSteps.innerHTML = `
+            <div class="agent-step-item" style="color:var(--warning); line-height: 1.5; padding: 0.5rem 0;">
+              ⚠️ <strong>Cloud AI Extraction is Disabled</strong><br>
+              ${escapeHtml(err.detail)}<br>
+              <span style="color:var(--text-muted); font-size:0.75rem;">To activate cloud extraction without mock results, configure <code>LLM_BACKEND=remote</code> and <code>REMOTE_LLM_API_KEY</code> in Render Environment Variables.</span>
+            </div>`;
+          alert("AI Extraction Paused: " + err.detail);
+          return;
+        }
         throw new Error(err.detail || "Agent execution failed");
       }
 

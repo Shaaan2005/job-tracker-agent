@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from app.agent.agent import run_agent, AgentError
-from app.agent.llm import OllamaLLM
+from app.agent.llm import OllamaLLM, get_llm_client
 from app.config import settings
 from app.db.database import get_db
 from app.db import queries
@@ -63,6 +63,45 @@ def get_agent_runs(limit: int = Query(50, ge=1, le=100), db: Session = Depends(g
     return queries.list_agent_runs(db, limit=limit)
 
 
+# ── LLM Status ─────────────────────────────────────────────────────────────────
+
+
+@router.get("/llm/status")
+def get_llm_status():
+    """Return the active LLM backend status and model without exposing secrets."""
+    backend = settings.LLM_BACKEND.lower().strip()
+    is_ready = False
+    model_name = ""
+    message = ""
+
+    if backend == "remote":
+        model_name = settings.REMOTE_LLM_MODEL
+        is_ready = bool(settings.REMOTE_LLM_API_KEY)
+        message = (
+            f"Remote cloud inference active ({model_name})"
+            if is_ready
+            else "REMOTE_LLM_API_KEY is not configured. Cloud inference is paused."
+        )
+    elif backend == "ollama":
+        model_name = settings.OLLAMA_MODEL
+        is_ready = True
+        message = f"Local Ollama active ({model_name})"
+    else:
+        backend = "disabled"
+        model_name = "None"
+        message = (
+            "LLM inference is disabled. Set LLM_BACKEND=remote with REMOTE_LLM_API_KEY "
+            "to enable cloud AI extraction."
+        )
+
+    return {
+        "backend": backend,
+        "model": model_name,
+        "is_ready": is_ready,
+        "message": message,
+    }
+
+
 # ── Applications ───────────────────────────────────────────────────────────────
 
 
@@ -72,7 +111,13 @@ async def create_application(body: ApplicationCreate, db: Session = Depends(get_
     if settings.LLM_BACKEND == "disabled":
         raise HTTPException(
             status_code=503,
-            detail="LLM backend is disabled in this deployment mode.",
+            detail="LLM backend is disabled in this deployment mode. To enable cloud extraction, set LLM_BACKEND=remote and configure REMOTE_LLM_API_KEY in environment variables.",
+        )
+
+    if settings.LLM_BACKEND == "remote" and not settings.REMOTE_LLM_API_KEY:
+        raise HTTPException(
+            status_code=503,
+            detail="Remote LLM backend is selected, but REMOTE_LLM_API_KEY is missing. Please set REMOTE_LLM_API_KEY in your environment variables.",
         )
 
     if not body.posting_text and not body.posting_url:
@@ -81,7 +126,12 @@ async def create_application(body: ApplicationCreate, db: Session = Depends(get_
             detail="Provide either posting_text or posting_url",
         )
 
-    llm = OllamaLLM()
+    try:
+        llm = get_llm_client()
+    except Exception as exc:
+        logger.error("Failed to initialize LLM client: %s", exc)
+        raise HTTPException(status_code=503, detail=str(exc))
+
     try:
         app_id, steps = await run_agent(
             llm=llm,

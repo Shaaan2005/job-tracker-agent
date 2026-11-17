@@ -254,3 +254,25 @@ def test_llm_backend_disabled(client, monkeypatch):
     profile_resp = client.post("/profile", json={"name": "Bob", "skills": ["python"]})
     assert profile_resp.status_code == 200
 
+
+def test_llm_status_endpoint(client):
+    """GET /llm/status returns backend mode and readiness."""
+    resp = client.get("/llm/status")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "backend" in data
+    assert "model" in data
+    assert "is_ready" in data
+
+
+def test_remote_llm_missing_api_key(client, monkeypatch):
+    """When LLM_BACKEND=remote and REMOTE_LLM_API_KEY is unset, POST /applications returns 503."""
+    from app.config import settings
+    monkeypatch.setattr(settings, "LLM_BACKEND", "remote")
+    monkeypatch.setattr(settings, "REMOTE_LLM_API_KEY", "")
+
+    resp = client.post("/applications", json={"posting_text": "Software Engineer"})
+    assert resp.status_code == 503
+    assert "missing" in resp.json()["detail"].lower() or "not set" in resp.json()["detail"].lower()
+
+
