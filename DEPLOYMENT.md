@@ -136,20 +136,33 @@ If you require persistent data retention beyond ephemeral demo storage:
 - **Inactivity Sleep**: Free instances sleep after 15 minutes of inactivity; the initial cold-start request after sleep takes ~30–50 seconds to wake up.
 - **LLM Mode**: By default, `LLM_BACKEND=disabled` in [`render.yaml`](render.yaml) so the app runs cleanly without an external API key.
 
-### Enabling Zero-Cost Remote LLM Inference in the Cloud
-To enable live AI skill extraction on the deployed Render site without crashing the 512 MB RAM limit:
-1. **Get a Free API Key**:
-   - Recommended provider: **Groq** ([console.groq.com](https://console.groq.com)).
-   - **Cost**: $0.00 (Free tier with generous rate limits, no credit card required).
-   - Generates an API key (e.g. `gsk_...`) supporting OpenAI-compatible chat completions with `llama-3.1-8b-instant`.
-2. **Add Environment Variables in Render**:
+### Enabling Remote LLM Inference in the Cloud
+To enable live AI skill extraction on the deployed Render site without exceeding the 512 MB RAM ceiling:
+
+1. **Groq Account Setup & Active Model**:
+   - Provider: **Groq** ([console.groq.com](https://console.groq.com)).
+   - Active Supported Model: **`openai/gpt-oss-20b`** (replaced deprecated `llama-3.1-8b-instant`).
+   - Endpoint: `https://api.groq.com/openai/v1`
+   - Context Window: 131,072 tokens.
+
+2. **Official Groq Free Plan Rate Limits & Cost Notice**:
+   - **Cost on Free Tier**: $0.00 (no credit card required for standard free quota).
+   - **Enforced Free Plan Limits for `openai/gpt-oss-20b`**:
+     - **30 Requests Per Minute (RPM)**
+     - **1,000 Requests Per Day (RPD)** *(Note: Free plan is capped at 1,000 RPD, not 14,400)*
+     - **8,000 Tokens Per Minute (TPM)**
+     - **200,000 Tokens Per Day (TPD)**
+   - **Behavior when limits are reached**: Groq returns `HTTP 429 Too Many Requests` until the rate-limit window resets.
+   - **Paid Developer Tier**: Requests beyond free quotas or higher concurrency require a paid Developer plan ($0.075 / 1M input tokens, $0.30 / 1M output tokens).
+
+3. **How to Enable in Render**:
    - In Render Dashboard $\rightarrow$ select `job-tracker-agent` $\rightarrow$ **Environment**.
-   - Set:
-     - `LLM_BACKEND`: `remote`
-     - `REMOTE_LLM_URL`: `https://api.groq.com/openai/v1`
-     - `REMOTE_LLM_MODEL`: `llama-3.1-8b-instant`
-     - `REMOTE_LLM_API_KEY`: `<your-groq-api-key>`
-   - Click **Save Changes**. Render will automatically redeploy and live AI extraction will be active!
+   - Add/update the following environment variables:
+     - `LLM_BACKEND` = `remote`
+     - `REMOTE_LLM_URL` = `https://api.groq.com/openai/v1`
+     - `REMOTE_LLM_MODEL` = `openai/gpt-oss-20b`
+     - `REMOTE_LLM_API_KEY` = *(enter your Groq API key directly in Render; never commit or share keys)*
+   - Click **Save Changes**. Render will automatically redeploy with cloud AI inference enabled.
 
 ---
 

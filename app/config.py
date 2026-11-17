@@ -14,7 +14,7 @@ class Settings:
     FETCH_MAX_BYTES: int = int(os.getenv("FETCH_MAX_BYTES", str(1024 * 1024)))  # 1 MB
     LLM_BACKEND: str = os.getenv("LLM_BACKEND", "ollama")  # "ollama", "remote", or "disabled"
     REMOTE_LLM_URL: str = os.getenv("REMOTE_LLM_URL") or os.getenv("OPENAI_BASE_URL", "https://api.groq.com/openai/v1")
-    REMOTE_LLM_MODEL: str = os.getenv("REMOTE_LLM_MODEL", "llama-3.1-8b-instant")
+    REMOTE_LLM_MODEL: str = os.getenv("REMOTE_LLM_MODEL", "openai/gpt-oss-20b")
     REMOTE_LLM_API_KEY: str = os.getenv("REMOTE_LLM_API_KEY") or os.getenv("OPENAI_API_KEY", "")
 
 
