@@ -5,9 +5,9 @@ This document describes deployment options for **job-tracker-agent**.
 > **Note on Live URL**:
 > The production endpoint is designated as:
 > ```
-> [LIVE_URL]
+> https://job-tracker-agent-twrl.onrender.com
 > ```
-> *(Replace `[LIVE_URL]` with your domain name or cloud public IP after deploying, e.g., `https://jobs.example.com` or `http://203.0.113.10:8000`.)*
+> *(Live Web Service deployed on Render)*
 
 ---
 
