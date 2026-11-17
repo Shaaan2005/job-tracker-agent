@@ -12,15 +12,16 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.0
       # LLM Backend configuration:
-      # Defaults to 'disabled' on free tier until you configure REMOTE_LLM_API_KEY.
-      # When you add REMOTE_LLM_API_KEY, change LLM_BACKEND to 'remote' for instant cloud inference.
+      # Defaults to 'remote' for cloud deployment with OpenAI-compatible Groq API.
       - key: LLM_BACKEND
-        value: disabled
+        value: remote
       - key: REMOTE_LLM_URL
         value: https://api.groq.com/openai/v1
       - key: REMOTE_LLM_MODEL
         value: openai/gpt-oss-20b
-      # NOTE: Do NOT add REMOTE_LLM_API_KEY here. Add it securely in Render Dashboard -> Environment.
+      # Managed securely in the Render dashboard:
+      - key: REMOTE_LLM_API_KEY
+        sync: false
       # Ephemeral demo storage: SQLite stores data in the local container filesystem.
       # NOTE: On Render Free tier, data resets when the instance spins down (after 15 min inactivity), restarts, or redeploys.
       # For permanent persistence without a 30-day drop, connect an external managed database (e.g. Neon PostgreSQL free tier).
