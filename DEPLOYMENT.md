@@ -107,3 +107,48 @@ In this mode:
      -d '{"posting_text": "Python Developer needed"}'
    # {"detail": "LLM backend is disabled in this deployment mode."}
    ```
+
+---
+
+## Option C: Render Cloud Deployment (Free Tier Web Service)
+
+Render provides free hosting for web services with automatic HTTPS and git push-to-deploy.
+
+### Requirements & Limitations
+- **Hosting Tier**: Render Free Web Service ($0/month).
+- **Inactivity Spin-down**: Free instances sleep after 15 minutes of inactivity; the first request after spin-down takes 30–50 seconds to boot.
+- **Storage**: By default, SQLite stores data on the local container filesystem. On the free tier without a persistent disk add-on, data persists across requests but resets on manual redeployments or container restarts.
+- **LLM Mode**: On free 512 MB instances, `LLM_BACKEND` defaults to `disabled` (or points to a remote Ollama endpoint via `OLLAMA_HOST`).
+
+### Deployment Steps
+
+1. **Create a GitHub Repository**:
+   - Create a new public or private repository on [github.com](https://github.com).
+   - Push your local code to GitHub:
+     ```bash
+     cd job-tracker-agent
+     git remote add origin https://github.com/<your-username>/<repo-name>.git
+     git branch -M main
+     git push -u origin main
+     ```
+
+2. **Deploy on Render**:
+   - Sign up or log in at [render.com](https://render.com).
+   - In the Render Dashboard, click **New +** $\rightarrow$ **Blueprint**.
+   - Select your GitHub repository.
+   - Render will automatically read [`render.yaml`](render.yaml) and configure:
+     - **Name**: `job-tracker-agent`
+     - **Environment**: `Python 3`
+     - **Build Command**: `pip install -r requirements.txt`
+     - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+   - Click **Apply**.
+
+3. **Verify Deployment**:
+   - Once the build succeeds, Render provides your live URL: `https://job-tracker-agent-<unique-id>.onrender.com`.
+   - Open `https://job-tracker-agent-<unique-id>.onrender.com` in your browser to verify the interactive dashboard.
+   - Verify health check:
+     ```bash
+     curl https://job-tracker-agent-<unique-id>.onrender.com/health
+     # {"status":"ok"}
+     ```
+
