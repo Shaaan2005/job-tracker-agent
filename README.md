@@ -2,8 +2,8 @@
 
 A job application tracker powered by a tool-calling AI agent. Paste a job posting (text or URL), and the agent extracts structured details (company, role, location, deadline, required skills), compares them against your skills profile, and saves the application to a SQLite database. Manage your applications through a REST API.
 
-> **Live Deployment URL**: `[LIVE_URL]`
-> *(Replace `[LIVE_URL]` with your live host or reverse-proxy address once verified in production, e.g. `https://job-tracker.example.com`. See [DEPLOYMENT.md](DEPLOYMENT.md) for full deployment instructions.)*
+> **Live demo:** <https://job-tracker-agent-twrl.onrender.com> ([API docs](https://job-tracker-agent-twrl.onrender.com/docs))
+> *Hosted on Render's free tier: the first request after a quiet period can take 30–60 seconds while the service wakes up, and demo data resets when it restarts. See [DEPLOYMENT.md](DEPLOYMENT.md) for details.*
 
 ## Architecture
 
