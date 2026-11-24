@@ -270,47 +270,50 @@ Tests use an in-memory SQLite database — no Ollama or external services needed
 
 ## Evaluation & Results
 
-The project includes an automated evaluation harness in `evaluation/run_eval.py` that benchmarks the real LLM agent on 12 software and AI internship postings against hand-annotated ground-truth skill labels (`evaluation/labels.json`).
+`evaluation/run_eval.py` runs the real agent (local `llama3` through Ollama) on job postings and compares the extracted required skills with hand-labeled ground truth (`evaluation/labels.json`).
 
-### Summary Metrics
+### Labeled postings (13: 12 synthetic internship postings + 1 additional posting)
 
-- **Model Evaluated**: `llama3`
-- **Evaluated Postings**: 12 synthetic internship postings (headers marked `# SYNTHETIC`)
-- **Macro-averaged Precision**: **0.9861**
-- **Macro-averaged Recall**: **0.9250**
-- **Average Agent Steps**: **4.0**
-- **Average JSON Retries**: **0.08**
-- **Average Latency**: **3.33s**
+Measured on 2026-11-24 with `llama3` on a local consumer GPU:
 
-### Per-Posting Breakdown
+- **Macro precision:** 0.913
+- **Macro recall:** 0.981
+- **Runs completed:** 13 / 13, all with the sequence `extract_posting_fields -> match_skills -> save_application -> finish`
+- **Average JSON retries:** 0.15
+- **Average latency:** 21.2 s per posting (depends heavily on hardware)
 
-| Posting File | Status | Precision | Recall | Steps | Retries | Latency |
+| Posting | Status | Precision | Recall | Steps | Retries | Latency |
 |---|---|---|---|---|---|---|
-| `posting_01.txt` | SUCCESS | 1.00 | 0.80 | 4 | 0 | 3.42s |
-| `posting_02.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 3.10s |
-| `posting_03.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 2.95s |
-| `posting_04.txt` | SUCCESS | 0.83 | 1.00 | 4 | 1 | 4.20s |
-| `posting_05.txt` | SUCCESS | 1.00 | 0.75 | 4 | 0 | 3.05s |
-| `posting_06.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 3.30s |
-| `posting_07.txt` | SUCCESS | 1.00 | 0.80 | 4 | 0 | 3.50s |
-| `posting_08.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 2.85s |
-| `posting_09.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 3.15s |
-| `posting_10.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 3.20s |
-| `posting_11.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 3.00s |
-| `posting_12.txt` | SUCCESS | 1.00 | 0.75 | 4 | 0 | 3.25s |
+| `elip_posting.txt` | SUCCESS | 0.71 | 1.00 | 4 | 0 | 40.0 s |
+| `posting_01.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 14.9 s |
+| `posting_02.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 14.3 s |
+| `posting_03.txt` | SUCCESS | 0.75 | 0.75 | 4 | 0 | 14.0 s |
+| `posting_04.txt` | SUCCESS | 1.00 | 1.00 | 4 | 1 | 27.9 s |
+| `posting_05.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 11.3 s |
+| `posting_06.txt` | SUCCESS | 1.00 | 1.00 | 4 | 1 | 26.4 s |
+| `posting_07.txt` | SUCCESS | 0.83 | 1.00 | 4 | 0 | 18.1 s |
+| `posting_08.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 20.1 s |
+| `posting_09.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 19.3 s |
+| `posting_10.txt` | SUCCESS | 0.57 | 1.00 | 4 | 0 | 31.0 s |
+| `posting_11.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 27.6 s |
+| `posting_12.txt` | SUCCESS | 1.00 | 1.00 | 4 | 0 | 10.4 s |
 
-### Tool-Call Sequence Distribution
+Most misses are near-duplicates or over-extraction rather than wrong skills: for example `modern javascript` instead of `javascript`, or listing `ec2`, `iam`, `s3` separately where the label says `aws`.
 
-The tool invocation sequence demonstrates how the agent chooses its actions depending on input type:
+### Real postings (3)
 
-| Tool Call Sequence | Frequency |
-|---|---|
-| `extract_posting_fields -> match_skills -> save_application -> finish` | 10x |
-| `fetch_posting -> extract_posting_fields -> match_skills -> save_application -> finish` | 2x |
+On three real postings (`evaluation/results_real.json`), precision and recall were 1.00 / 1.00, at about 46 s per posting. Real postings are roughly 2.5× longer than the synthetic ones.
+
+### Notes and limitations
+
+- This is a small test set (13 + 3 postings), and 12 of the 13 labeled postings are synthetic. Treat the numbers as a sanity check, not a benchmark.
+- LLM output varies between runs. An earlier run on the same machine scored 0.877 precision and 0.923 recall and exposed a crash: the model returned an extra `next_step` field, which `save_application` passed straight to the database model. Unknown fields are now dropped and logged (see `app/agent/tools.py`), with a regression test in `tests/test_agent.py`.
+- Earlier versions of this README reported 0.986 precision and 3.3 s latency for this set. Those numbers could not be reproduced and have been replaced with the measured results above.
 
 To run the evaluation yourself against a running Ollama server:
 ```bash
-python evaluation/run_eval.py
+python evaluation/run_eval.py             # labeled postings
+python evaluation/run_eval.py --set real  # real postings
 ```
 
 ## Design Decisions

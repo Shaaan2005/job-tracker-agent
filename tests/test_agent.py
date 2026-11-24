@@ -313,3 +313,17 @@ async def test_agent_run_persistence_and_order(db_session):
     assert len(latest_run.steps) == len(steps)
     assert [s["tool"] for s in latest_run.steps] == expected_tool_order
 
+
+
+def test_save_application_ignores_unknown_llm_fields(db_session):
+    """Regression: an extra key from the LLM (e.g. 'next_step') must not crash the save."""
+    from app.agent.tools import save_application
+
+    app_id = save_application(
+        {"company": "Acme", "role_title": "ML Intern", "next_step": "apply", "id": 999},
+        db_session,
+    )
+    saved = queries.get_application(db_session, app_id)
+    assert saved.company == "Acme"
+    assert saved.role_title == "ML Intern"
+    assert saved.id != 999  # the LLM cannot choose the primary key

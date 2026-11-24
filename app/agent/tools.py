@@ -11,6 +11,7 @@ import re
 from sqlalchemy.orm import Session
 
 from app.db import queries
+from app.db.models import Application
 from app.schemas import ExtractedPostingFields, SkillsMatchResult
 from app.services import posting_fetcher, skills_matcher
 
@@ -201,7 +202,19 @@ def match_skills_tool(required_skills: list[str], db: Session) -> dict:
     return result
 
 
+# Columns the agent may set. The LLM sometimes adds extra keys (for example
+# "next_step"); passing those to the model would raise, so they are dropped.
+_SAVABLE_FIELDS = {c.name for c in Application.__table__.columns} - {"id", "created_at", "updated_at"}
+
+
 def save_application(fields: dict, db: Session) -> int:
-    """Write an application to the database and return its id."""
-    app = queries.create_application(db, **fields)
+    """Write an application to the database and return its id.
+
+    Keys that are not Application columns are ignored and logged.
+    """
+    unknown = sorted(set(fields) - _SAVABLE_FIELDS)
+    if unknown:
+        logger.warning("save_application: ignoring unknown fields from the LLM: %s", unknown)
+    clean = {k: v for k, v in fields.items() if k in _SAVABLE_FIELDS}
+    app = queries.create_application(db, **clean)
     return app.id

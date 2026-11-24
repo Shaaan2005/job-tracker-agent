@@ -1,171 +1,546 @@
 {
   "model": "llama3",
-  "total_postings": 12,
-  "macro_precision": 0.9861,
-  "macro_recall": 0.925,
+  "dataset": "synthetic",
+  "total_postings": 13,
+  "macro_precision": 0.913,
+  "macro_recall": 0.9808,
   "avg_agent_steps": 4.0,
-  "avg_json_retries": 0.08,
-  "avg_wall_clock_seconds": 3.33,
+  "avg_json_retries": 0.15,
+  "avg_wall_clock_seconds": 21.17,
   "tool_sequence_distribution": {
-    "extract_posting_fields -> match_skills -> save_application -> finish": 10,
-    "fetch_posting -> extract_posting_fields -> match_skills -> save_application -> finish": 2
+    "extract_posting_fields -> match_skills -> save_application -> finish": 13
   },
   "results": [
     {
+      "file": "elip_posting.txt",
+      "status": "SUCCESS",
+      "ground_truth_required": [
+        "python",
+        "fastapi",
+        "docker",
+        "postgresql",
+        "git"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "Python",
+        "asyncio",
+        "Pydantic",
+        "FastAPI",
+        "Docker",
+        "PostgreSQL",
+        "Git"
+      ],
+      "extracted_normalized": [
+        "asyncio",
+        "docker",
+        "fastapi",
+        "git",
+        "postgresql",
+        "pydantic",
+        "python"
+      ],
+      "false_negatives": [],
+      "false_positives": [
+        "asyncio",
+        "pydantic"
+      ],
+      "precision": 0.7143,
+      "recall": 1.0,
+      "steps_count": 4,
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
+      "json_retries": 0,
+      "wall_clock_seconds": 39.96
+    },
+    {
       "file": "posting_01.txt",
       "status": "SUCCESS",
-      "ground_truth": ["python", "docker", "postgresql", "kubernetes", "git"],
-      "extracted_raw": ["Python", "Docker", "PostgreSQL", "Kubernetes"],
-      "extracted_normalized": ["docker", "kubernetes", "postgresql", "python"],
+      "ground_truth_required": [
+        "python",
+        "docker",
+        "postgresql",
+        "kubernetes",
+        "git"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "Python",
+        "Docker",
+        "PostgreSQL",
+        "Kubernetes",
+        "Git"
+      ],
+      "extracted_normalized": [
+        "docker",
+        "git",
+        "kubernetes",
+        "postgresql",
+        "python"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
       "precision": 1.0,
-      "recall": 0.8,
+      "recall": 1.0,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
       "json_retries": 0,
-      "wall_clock_seconds": 3.42
+      "wall_clock_seconds": 14.9
     },
     {
       "file": "posting_02.txt",
       "status": "SUCCESS",
-      "ground_truth": ["python", "pytorch", "linux", "git"],
-      "extracted_raw": ["Python", "PyTorch", "Linux", "Git"],
-      "extracted_normalized": ["git", "linux", "python", "pytorch"],
+      "ground_truth_required": [
+        "python",
+        "pytorch",
+        "linux",
+        "git"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "Python",
+        "PyTorch",
+        "Linux",
+        "Git"
+      ],
+      "extracted_normalized": [
+        "git",
+        "linux",
+        "python",
+        "pytorch"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
       "precision": 1.0,
       "recall": 1.0,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
       "json_retries": 0,
-      "wall_clock_seconds": 3.1
+      "wall_clock_seconds": 14.27
     },
     {
       "file": "posting_03.txt",
       "status": "SUCCESS",
-      "ground_truth": ["javascript", "react", "typescript", "git"],
-      "extracted_raw": ["JavaScript", "React", "TypeScript", "Git"],
-      "extracted_normalized": ["git", "javascript", "react", "typescript"],
-      "precision": 1.0,
-      "recall": 1.0,
+      "ground_truth_required": [
+        "javascript",
+        "react",
+        "typescript",
+        "git"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "modern JavaScript (ES6+)",
+        "React",
+        "TypeScript",
+        "Git"
+      ],
+      "extracted_normalized": [
+        "git",
+        "modern javascript",
+        "react",
+        "typescript"
+      ],
+      "false_negatives": [
+        "javascript"
+      ],
+      "false_positives": [
+        "modern javascript"
+      ],
+      "precision": 0.75,
+      "recall": 0.75,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
       "json_retries": 0,
-      "wall_clock_seconds": 2.95
+      "wall_clock_seconds": 14.02
     },
     {
       "file": "posting_04.txt",
       "status": "SUCCESS",
-      "ground_truth": ["typescript", "nodejs", "react", "postgresql", "docker"],
-      "extracted_raw": ["TypeScript", "Node.js", "React", "PostgreSQL", "Docker", "Redis"],
-      "extracted_normalized": ["docker", "nodejs", "postgresql", "react", "redis", "typescript"],
-      "precision": 0.8333,
+      "ground_truth_required": [
+        "typescript",
+        "nodejs",
+        "react",
+        "postgresql",
+        "docker"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "TypeScript",
+        "Node.js",
+        "React",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "extracted_normalized": [
+        "docker",
+        "nodejs",
+        "postgresql",
+        "react",
+        "typescript"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
+      "precision": 1.0,
       "recall": 1.0,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
       "json_retries": 1,
-      "wall_clock_seconds": 4.2
+      "wall_clock_seconds": 27.89
     },
     {
       "file": "posting_05.txt",
       "status": "SUCCESS",
-      "ground_truth": ["cpp", "go", "linux", "git"],
-      "extracted_raw": ["C++", "Go", "Linux"],
-      "extracted_normalized": ["cpp", "go", "linux"],
+      "ground_truth_required": [
+        "cpp",
+        "go",
+        "linux",
+        "git"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "C++",
+        "Go",
+        "Linux",
+        "Git"
+      ],
+      "extracted_normalized": [
+        "cpp",
+        "git",
+        "go",
+        "linux"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
       "precision": 1.0,
-      "recall": 0.75,
+      "recall": 1.0,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
       "json_retries": 0,
-      "wall_clock_seconds": 3.05
+      "wall_clock_seconds": 11.31
     },
     {
       "file": "posting_06.txt",
       "status": "SUCCESS",
-      "ground_truth": ["python", "tensorflow", "pytorch", "cpp"],
-      "extracted_raw": ["Python", "TensorFlow", "PyTorch", "C++"],
-      "extracted_normalized": ["cpp", "python", "pytorch", "tensorflow"],
+      "ground_truth_required": [
+        "python",
+        "tensorflow",
+        "pytorch",
+        "cpp"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "Python",
+        "TensorFlow",
+        "PyTorch",
+        "C++"
+      ],
+      "extracted_normalized": [
+        "cpp",
+        "python",
+        "pytorch",
+        "tensorflow"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
       "precision": 1.0,
       "recall": 1.0,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
-      "json_retries": 0,
-      "wall_clock_seconds": 3.3
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
+      "json_retries": 1,
+      "wall_clock_seconds": 26.39
     },
     {
       "file": "posting_07.txt",
       "status": "SUCCESS",
-      "ground_truth": ["docker", "kubernetes", "linux", "python", "go"],
-      "extracted_raw": ["Docker", "Kubernetes", "Linux", "Python"],
-      "extracted_normalized": ["docker", "kubernetes", "linux", "python"],
-      "precision": 1.0,
-      "recall": 0.8,
+      "ground_truth_required": [
+        "docker",
+        "kubernetes",
+        "linux",
+        "python",
+        "go"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "Linux",
+        "shell scripting",
+        "Go"
+      ],
+      "extracted_normalized": [
+        "docker",
+        "go",
+        "kubernetes",
+        "linux",
+        "python",
+        "shell scripting"
+      ],
+      "false_negatives": [],
+      "false_positives": [
+        "shell scripting"
+      ],
+      "precision": 0.8333,
+      "recall": 1.0,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
       "json_retries": 0,
-      "wall_clock_seconds": 3.5
+      "wall_clock_seconds": 18.09
     },
     {
       "file": "posting_08.txt",
       "status": "SUCCESS",
-      "ground_truth": ["python", "sql", "postgresql", "docker"],
-      "extracted_raw": ["Python", "SQL", "PostgreSQL", "Docker"],
-      "extracted_normalized": ["docker", "postgresql", "python", "sql"],
+      "ground_truth_required": [
+        "python",
+        "sql",
+        "postgresql",
+        "docker"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "Python",
+        "SQL",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "extracted_normalized": [
+        "docker",
+        "postgresql",
+        "python",
+        "sql"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
       "precision": 1.0,
       "recall": 1.0,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
       "json_retries": 0,
-      "wall_clock_seconds": 2.85
+      "wall_clock_seconds": 20.07
     },
     {
       "file": "posting_09.txt",
       "status": "SUCCESS",
-      "ground_truth": ["vue", "nodejs", "javascript", "redis"],
-      "extracted_raw": ["Vue", "Node.js", "JavaScript", "Redis"],
-      "extracted_normalized": ["javascript", "nodejs", "redis", "vue"],
+      "ground_truth_required": [
+        "vue",
+        "nodejs",
+        "javascript",
+        "redis"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "Vue",
+        "Node.js",
+        "JavaScript",
+        "Redis"
+      ],
+      "extracted_normalized": [
+        "javascript",
+        "nodejs",
+        "redis",
+        "vue"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
       "precision": 1.0,
       "recall": 1.0,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
       "json_retries": 0,
-      "wall_clock_seconds": 3.15
+      "wall_clock_seconds": 19.34
     },
     {
       "file": "posting_10.txt",
       "status": "SUCCESS",
-      "ground_truth": ["go", "docker", "kubernetes", "aws"],
-      "extracted_raw": ["Go", "Docker", "Kubernetes", "AWS"],
-      "extracted_normalized": ["aws", "docker", "go", "kubernetes"],
-      "precision": 1.0,
+      "ground_truth_required": [
+        "go",
+        "docker",
+        "kubernetes",
+        "aws"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "Go",
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "EC2",
+        "S3",
+        "IAM"
+      ],
+      "extracted_normalized": [
+        "aws",
+        "docker",
+        "ec2",
+        "go",
+        "iam",
+        "kubernetes",
+        "s3"
+      ],
+      "false_negatives": [],
+      "false_positives": [
+        "ec2",
+        "iam",
+        "s3"
+      ],
+      "precision": 0.5714,
       "recall": 1.0,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
       "json_retries": 0,
-      "wall_clock_seconds": 3.2
+      "wall_clock_seconds": 30.99
     },
     {
       "file": "posting_11.txt",
       "status": "SUCCESS",
-      "ground_truth": ["typescript", "react", "python", "fastapi"],
-      "extracted_raw": ["TypeScript", "React", "Python", "FastAPI"],
-      "extracted_normalized": ["fastapi", "python", "react", "typescript"],
+      "ground_truth_required": [
+        "typescript",
+        "react",
+        "python",
+        "fastapi"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "TypeScript",
+        "React",
+        "Python",
+        "FastAPI"
+      ],
+      "extracted_normalized": [
+        "fastapi",
+        "python",
+        "react",
+        "typescript"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
       "precision": 1.0,
       "recall": 1.0,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
       "json_retries": 0,
-      "wall_clock_seconds": 3.0
+      "wall_clock_seconds": 27.57
     },
     {
       "file": "posting_12.txt",
       "status": "SUCCESS",
-      "ground_truth": ["csharp", "dotnet", "sql", "docker"],
-      "extracted_raw": ["C#", ".NET", "SQL"],
-      "extracted_normalized": ["csharp", "dotnet", "sql"],
+      "ground_truth_required": [
+        "csharp",
+        "dotnet",
+        "sql",
+        "docker"
+      ],
+      "alternative_skills": [],
+      "preferred_skills": [],
+      "domain_tags": [],
+      "extracted_raw": [
+        "C#",
+        ".NET",
+        "SQL",
+        "Docker"
+      ],
+      "extracted_normalized": [
+        "csharp",
+        "docker",
+        "dotnet",
+        "sql"
+      ],
+      "false_negatives": [],
+      "false_positives": [],
       "precision": 1.0,
-      "recall": 0.75,
+      "recall": 1.0,
       "steps_count": 4,
-      "tool_sequence": ["extract_posting_fields", "match_skills", "save_application", "finish"],
+      "tool_sequence": [
+        "extract_posting_fields",
+        "match_skills",
+        "save_application",
+        "finish"
+      ],
       "json_retries": 0,
-      "wall_clock_seconds": 3.25
+      "wall_clock_seconds": 10.45
     }
   ]
 }
